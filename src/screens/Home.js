@@ -1,12 +1,16 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import HomeHeader from '../components/HomeHeader'
+import ListEmployees from '../components/ListEmployees';
 
 const Home = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <StatusBar backgroundColor="#b36ff7" barStyle="light-content" />
       <HomeHeader />
+      <View height={10}/>
+      <ListEmployees/>
+
     </SafeAreaView>
   );
 }

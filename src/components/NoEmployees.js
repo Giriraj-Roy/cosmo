@@ -3,8 +3,8 @@ import React from 'react'
 
 const NoEmployees = () => {
   return (
-    <View>
-      <Text>NoEmployees</Text>
+    <View style={{width: "100%", height: "70%", justifyContent: "center", alignItems: "center"}}>
+      <Text style={{color: "black"}}>No Employees</Text>
     </View>
   )
 }
