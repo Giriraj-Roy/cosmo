@@ -1,12 +1,16 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { Image, SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import GoBack from '../components/minors/GoBack'
+import EmployeeDetails from '../components/EmployeeDetails'
 
 const Details = () => {
-  return (
-    <View>
-      <Text>Details</Text>
-    </View>
-  )
+
+    return (
+        <SafeAreaView style={{flex:1, backgroundColor: "white"}}>
+            <GoBack screen={"Details"} />
+            <EmployeeDetails />
+        </SafeAreaView>
+    )
 }
 
 export default Details

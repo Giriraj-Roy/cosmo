@@ -1,6 +1,6 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import HomeHeader from '../components/HomeHeader'
+import HomeHeader from '../components/minors/HomeHeader'
 import ListEmployees from '../components/ListEmployees';
 
 const Home = () => {
