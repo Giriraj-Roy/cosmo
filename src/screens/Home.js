@@ -1,15 +1,23 @@
 import { SafeAreaView, StatusBar, StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import HomeHeader from '../components/minors/HomeHeader'
 import ListEmployees from '../components/ListEmployees';
+import CreateEmployeeBtn from '../components/CreateEmployeeBtn';
+import AppContext from '../utils/AppContext';
+import CreateEmpModal from '../components/CreateEmpModal';
 
 const Home = () => {
+  const {createEmp} = useContext(AppContext);
   return (
     <SafeAreaView style={{flex: 1}}>
       <StatusBar backgroundColor="#b36ff7" barStyle="light-content" />
       <HomeHeader />
-      <View height={10}/>
+      {/* <View height={10}/> */}
       <ListEmployees/>
+      <CreateEmployeeBtn/>
+      {
+        createEmp && <CreateEmpModal />
+      }
 
     </SafeAreaView>
   );

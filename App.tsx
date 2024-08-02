@@ -1,10 +1,13 @@
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import AppNavigation from './src/navigation/AppNavigation'
+import AppProvider from './src/utils/AppProvider'
 
 const App = () => {
   return (
-    <AppNavigation/>
+    <AppProvider>
+      <AppNavigation/>
+    </AppProvider>
   )
 }
 

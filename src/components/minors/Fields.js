@@ -1,9 +1,9 @@
 import { Image, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 
-const Fields = ({item, value}) => {
+const Fields = ({item, value, utility="none"}) => {
 
-    const [edit, setEdit] = useState(false);
+    const [edit, setEdit] = useState(utility=="create");
     const [itemValue, setItemValue] = useState(value || "");
 
     const handleSubmit=()=>{
@@ -18,18 +18,20 @@ const Fields = ({item, value}) => {
                 <Text style={{ fontWeight: "500",fontSize: 14, color: "gray", paddingHorizontal: 14}}>
                     {item.toUpperCase()}
                 </Text>
-                <TouchableOpacity onPress={()=> setEdit(true)}>
-                    <Image source={require("../../assets/images/edit.png")}  style={{width:18, height: 18}}/>
-                </TouchableOpacity>
+                {
+                    utility!="create" &&
+                    <TouchableOpacity onPress={()=> setEdit(true)}>
+                        <Image source={require("../../assets/images/edit.png")}  style={{width:18, height: 18}}/>
+                    </TouchableOpacity>
+                }
             </View>
             {
                 edit ?
                 <TextInput
                     value={itemValue}
-                    placeholder={`${itemValue}`}
+                    placeholder={`${itemValue ? itemValue : item}`}
                     onChangeText={(e)=>setItemValue(e)}
                     style={styles.subHead}
-                    autoFocus={true}
                     onSubmitEditing={handleSubmit}
                 />
                 :
