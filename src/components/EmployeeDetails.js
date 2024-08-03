@@ -5,7 +5,7 @@ import Fields from './minors/Fields'
 const EmployeeDetails = () => {
   return (
     <ScrollView>
-        <View style={{width: "100%", height: "30%", justifyContent: "center", alignItems: "center"}}>
+        <View style={{width: "100%", height: "25%", justifyContent: "center", alignItems: "center"}}>
             <Image source={require("../assets/images/user_profile.png")} style={{width: 100, height: 100}} />
             <Text>
                 EMP ID

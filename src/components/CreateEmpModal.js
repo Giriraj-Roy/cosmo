@@ -1,10 +1,11 @@
 import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import Fields from './minors/Fields'
 import AppContext from '../utils/AppContext'
 
 const CreateEmpModal = () => {
     const {createEmp,setCreateEmp} = useContext(AppContext);
+    const [details, setDetails] = useState([]);
     const handleAdd = ()=>{
 
     }
@@ -14,7 +15,7 @@ const CreateEmpModal = () => {
             visible={createEmp}
         >
             <ScrollView contentContainerStyle={styles.container}>
-                {/* <View style={styles.container}> */}
+
                     <Fields item={"Name"} utility={"create"} value={""} />
                     <Fields item={"Email"} utility={"create"} value={""} />
                     <Fields item={"Phone"} utility={"create"} value={""} />
@@ -34,7 +35,7 @@ const CreateEmpModal = () => {
                     <TouchableOpacity onPress={()=>setCreateEmp(false)} style={[styles.cta, {backgroundColor: "white", borderWidth:1}]}>
                         <Text style={[{color: "white", fontSize: 16, fontWeight: 500}, {color : "#b36ff7"}]}> CANCEL</Text>
                     </TouchableOpacity>
-                {/* </View> */}
+
             </ScrollView>
         </Modal>
     )

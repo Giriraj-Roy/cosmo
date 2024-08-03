@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     container : {
         width: "100%",
         paddingVertical: 14, 
-        paddingHorizontal: 10
+        paddingHorizontal: 22
     },
     name: {
         fontSize: 20,

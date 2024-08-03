@@ -6,10 +6,16 @@ const Fields = ({item, value, utility="none"}) => {
     const [edit, setEdit] = useState(utility=="create");
     const [itemValue, setItemValue] = useState(value || "");
 
+    // API Call To be Handled While Updating Data
     const handleSubmit=()=>{
         //make API call
-        console.log("make API call");
+        console.log("make UPDATE API call");
         setEdit(false);
+    }
+
+    //API call To be handled while Creating New Employee
+    const handleNewValue= ()=>{
+        
     }
 
     return (
@@ -32,7 +38,7 @@ const Fields = ({item, value, utility="none"}) => {
                     placeholder={`${itemValue ? itemValue : item}`}
                     onChangeText={(e)=>setItemValue(e)}
                     style={styles.subHead}
-                    onSubmitEditing={handleSubmit}
+                    onSubmitEditing={utility!="create" ? handleSubmit : handleNewValue}
                 />
                 :
                 <Text style={styles.subHead}>
