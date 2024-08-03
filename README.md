@@ -66,6 +66,7 @@ COSMO
 ### Why is this COSMIC ?
 
 - Standard Code Practices
+- Integration of BaaS from ![CosmoCloud](https://cosmocloud.io/) [Excellent Backend as a Service Platform]
 - Well Maintained API handling
 - Proper Handling of Error and Empty States with Loaders.
 - Finely divided Components for effective Resuability
