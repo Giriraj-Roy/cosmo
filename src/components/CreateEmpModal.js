@@ -4,9 +4,11 @@ import Fields from './minors/Fields'
 import AppContext from '../utils/AppContext'
 import Loader from './Loader'
 import { POSTEmployee } from '../utils/ApiCalls'
+import { useNavigation } from '@react-navigation/native'
 
 const CreateEmpModal = () => {
     const {createEmp,setCreateEmp, loading, setLoading} = useContext(AppContext);
+    const navigation = useNavigation();
     const tempDetails = {
         name: "", email: "", phone: "", address : {}
     }
@@ -21,6 +23,7 @@ const CreateEmpModal = () => {
         setTimeout(()=>{
             setLoading(false);
             setCreateEmp(false);
+            navigation.navigate("Home")
         },1000)
 
     }
