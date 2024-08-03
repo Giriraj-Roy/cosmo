@@ -2,30 +2,46 @@ import { Modal, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'rea
 import React, { useContext, useState } from 'react'
 import Fields from './minors/Fields'
 import AppContext from '../utils/AppContext'
+import Loader from './Loader'
+import { POSTEmployee } from '../utils/ApiCalls'
 
 const CreateEmpModal = () => {
-    const {createEmp,setCreateEmp} = useContext(AppContext);
-    const [details, setDetails] = useState([]);
-    const handleAdd = ()=>{
+    const {createEmp,setCreateEmp, loading, setLoading} = useContext(AppContext);
+    const tempDetails = {
+        name: "", email: "", phone: "", address : {}
+    }
+    const [details, setDetails] = useState(tempDetails);
+    const handleAdd = async ()=>{
+        setLoading(true)
+        // console.log("Details >>> ", loading,  details);
+
+        const response = await POSTEmployee(details)
+        console.log("POSTEmployee>>> ",response);
+        
+        setTimeout(()=>{
+            setLoading(false);
+            setCreateEmp(false);
+        },1000)
 
     }
     return (
+        loading ? <Loader/> :
         <Modal 
             transparent={true}
             visible={createEmp}
         >
             <ScrollView contentContainerStyle={styles.container}>
 
-                    <Fields item={"Name"} utility={"create"} value={""} />
-                    <Fields item={"Email"} utility={"create"} value={""} />
-                    <Fields item={"Phone"} utility={"create"} value={""} />
+                    <Fields item={"Name"} details={details} setDetails={setDetails} utility={"create"} value={""} />
+                    <Fields item={"Email"} details={details} setDetails={setDetails} utility={"create"} value={""} />
+                    <Fields item={"Phone"} details={details} setDetails={setDetails} utility={"create"} value={""} />
                     <Text style={{ fontWeight: "500",fontSize: 14, color: "gray", paddingHorizontal: 14}}>
                         ADDRESS
                     </Text>
-                    <Fields item={"Lane"} utility={"create"} value={""} />
-                    <Fields item={"City"} utility={"create"} value={""} />
-                    <Fields item={"Country"} utility={"create"} value={""} />
-                    <Fields item={"Zip Code"} utility={"create"} value={""} />
+                    <Fields item={"Lane"} details={details} setDetails={setDetails} utility={"create"} value={""} />
+                    <Fields item={"City"} details={details} setDetails={setDetails} utility={"create"} value={""} />
+                    <Fields item={"Country"} details={details} setDetails={setDetails} utility={"create"} value={""} />
+                    <Fields item={"Zip"} details={details} setDetails={setDetails} utility={"create"} value={""} />
 
 
                     

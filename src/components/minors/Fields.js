@@ -1,21 +1,54 @@
-import { Image, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import React, { useContext, useState } from 'react'
+import { GETEmployeeByID, PATCHEmployee } from '../../utils/ApiCalls';
+import AppContext from '../../utils/AppContext';
 
-const Fields = ({item, value, utility="none"}) => {
+const Fields = ({item, details, setDetails, value, utility="none"}) => {
 
+    const {currentEmp} = useContext(AppContext)
     const [edit, setEdit] = useState(utility=="create");
     const [itemValue, setItemValue] = useState(value || "");
 
+
     // API Call To be Handled While Updating Data
-    const handleSubmit=()=>{
-        //make API call
+    const handleSubmit=async ()=>{
+        //make API call to PATCH data
         console.log("make UPDATE API call");
+        try{
+            let keyVal = item.toLowerCase()
+            if(keyVal == "name" || keyVal == "email" || keyVal == "phone"){
+                const temp={[keyVal] : itemValue}
+                const response = await PATCHEmployee(currentEmp?._id,temp)
+                console.log("PATCHEmployee>>> ",response)
+            }
+            else{
+                const temp = {address : {[keyVal] : itemValue}}
+                const response = await PATCHEmployee(currentEmp?._id,temp)
+                console.log("PATCHEmployee>>> ",response)
+            }
+            
+        }catch(e){
+            console.log(e);
+        }
         setEdit(false);
     }
 
     //API call To be handled while Creating New Employee
     const handleNewValue= ()=>{
-        
+        try{
+            let keyVal = item.toLowerCase()
+            if(keyVal == "name" || keyVal == "email" || keyVal == "phone"){
+                const temp={...details,  [keyVal] : itemValue}
+                setDetails(temp)
+            }
+            else{
+                const temp = {...details , address : {...details.address , [keyVal] : itemValue}}
+                setDetails(temp)
+            }
+            
+        }catch(e){
+            console.log(e);
+        }
     }
 
     return (
@@ -38,11 +71,20 @@ const Fields = ({item, value, utility="none"}) => {
                     placeholder={`${itemValue ? itemValue : item}`}
                     onChangeText={(e)=>setItemValue(e)}
                     style={styles.subHead}
+                    inputMode={`${
+                        (item.toLowerCase()==="phone")
+                            ? "tel"
+                            : item.toLowerCase()==="email"
+                            ? "email"
+                            : "text"
+                        }
+                    }`}
+                    onBlur={utility=="create" ? handleNewValue : null}
                     onSubmitEditing={utility!="create" ? handleSubmit : handleNewValue}
                 />
                 :
                 <Text style={styles.subHead}>
-                    {value}
+                    {itemValue}
                 </Text>
             }
         </View>

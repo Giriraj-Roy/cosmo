@@ -1,16 +1,23 @@
 import { Platform, StyleSheet, Text, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useContext } from 'react'
 import { useNavigation } from '@react-navigation/native'
+import AppContext from '../utils/AppContext';
 
 const EmployeeCard = ({employee_details}) => {
     const navigation=useNavigation();
+    const {setCurrentEmp} = useContext(AppContext)
+    const handleNavigation = ()=>{
+        setCurrentEmp(employee_details)
+        navigation.navigate("Details", {employee_details : employee_details})
+    }
+
     return (
         <TouchableOpacity 
             style={styles.container}
-            onPress={()=>navigation.navigate("Details")}
+            onPress={()=>handleNavigation()}
         >
-            <Text style={styles.name}>Employee Name</Text>
-            <Text style={styles.id}>Employee ID</Text>
+            <Text style={styles.name}>{employee_details?.name ? employee_details?.name : "Employee Name"}</Text>
+            <Text style={styles.id}>{employee_details?._id ? employee_details?._id : "Employee ID"}</Text>
         </TouchableOpacity>
     )
 }

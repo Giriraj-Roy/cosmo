@@ -3,12 +3,12 @@ import React from 'react'
 import GoBack from '../components/minors/GoBack'
 import EmployeeDetails from '../components/EmployeeDetails'
 
-const Details = () => {
+const Details = ({navigation, route}) => {
 
     return (
         <SafeAreaView style={{flex:1, backgroundColor: "white"}}>
             <GoBack screen={"Details"} />
-            <EmployeeDetails />
+            <EmployeeDetails employee_details={route?.params?.employee_details}/>
         </SafeAreaView>
     )
 }
